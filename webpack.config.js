@@ -45,7 +45,6 @@ module.exports = {
         }],
       },
 
-      // Loaders for other file types can go here
     ],
   },
     plugins: [

@@ -19,7 +19,7 @@ require('babel-core/register')({
 
 
 var app = express();
-var ReactServer = require("./serverReact.js");
+var ReactServer = require("./server/serverReact.js");
 
 app.get("/", function(req,res){
   var reactServer = new ReactServer();
