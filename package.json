@@ -29,7 +29,8 @@
     "babel-plugin-css-modules-transform": "^1.2.7",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-loader": "^7.0.0"
+    "babel-loader": "^7.0.0",
+    "react-hot-loader": "^3.0.0-beta.7"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
