@@ -4,7 +4,6 @@ process.env.BABEL_ENV = 'server';
 
 
 var app = express();
-var ReactServer = require("./server/serverReact.js");
 var bodyParser = require('body-parser');
 var cors = require("cors");
 const pg = require('pg');
