@@ -1,5 +1,6 @@
-if(process.env.API_URL=="_") process.env.API_URL = "";
-var url = process.env.API_URL || "http://localhost:3000";
+var apiURL = process.env.API_URL;
+if(apiURL == "_") apiURL = "";
+var url = apiURL || "http://localhost:3000";
 var location = "";
 try{
   if (typeof window !== 'undefined') window = {location: ""};

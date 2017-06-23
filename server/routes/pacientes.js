@@ -19,6 +19,7 @@ router.post('/', function(req,res,next){
     else next( new errors.InternalServerError(err) )
     })
 });
+
 router.put('/:id', admin ,function(req,res,next){
   paciente.update( req.knex,req.params.id,req.body )
   .then( function(result){
@@ -29,5 +30,18 @@ router.put('/:id', admin ,function(req,res,next){
      else next( new errors.InternalServerError(err) )
     })
 });
+
+router.get('/list', admin ,function(req,res,next){
+  paciente.list( req.knex)
+  .then( function(result){
+     res.status(200).json(result)
+   })
+   .catch( function(err){
+     if(err.statusCode) next(err);
+     else next( new errors.InternalServerError(err) )
+    })
+});
+
+
 
 module.exports = router;
