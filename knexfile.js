@@ -37,7 +37,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      host: "",
+      host: "booking.crn5tfrxosyw.us-east-1.rds.amazonaws.com",
       database: process.env.DB_NAME,
       user:     process.env.DB_USER,
       password: process.env.DB_PASSWORD
