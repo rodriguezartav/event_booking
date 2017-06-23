@@ -22,6 +22,12 @@ app.use( "/reservaciones", reservaciones );
 app.use( "/pacientes", pacientes );
 app.use( "/pagos", pagos );
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use(express.static('dist'))
 
 app.use((err, req, res, next) => {
