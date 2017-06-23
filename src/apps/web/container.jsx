@@ -35,7 +35,10 @@ class Container extends React.Component {
 
   renderButtons(){
     if( this.saving ) return false;
-    else return <button onClick={this.onSave} type="button" className="slds-button slds-button--brand">Reservar</button>
+    else return <div>
+      <button onClick={this.onSave} type="button" className="slds-button slds-button--brand">Reservar</button>
+      <a style={{right: 10, position: "absolute"}} type="button" href="/admin.html" className="slds-float--right slds-button slds-button--neutral">Reservaciones</a>
+    </div>
   }
 
   renderError(){

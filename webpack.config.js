@@ -24,11 +24,11 @@ module.exports = {
   module: {
     rules: [
     {
-            test: /\.css$/,
-            loader:  ExtractTextPlugin.extract({
-              loader: 'css-loader?importLoaders=1',
-            }),
-          },
+        test: /\.css$/,
+        loader:  ExtractTextPlugin.extract({
+          loader: 'css-loader?importLoaders=1',
+        }),
+      },
       {
         test: /\.js$/,
         exclude: [/node_modules/],
