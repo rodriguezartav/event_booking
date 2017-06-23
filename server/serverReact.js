@@ -1,8 +1,7 @@
 var React = require('react');
 var reactDOM = require('react-dom/server');
-var App = require('./src/component.jsx');
-var Stats = require("./stats.json");
-
+var App = require('../src/apps/web/container.jsx');
+var Stats = require("../stats.json");
 
 var ReactServer = function(title){
   const name = "Hi dani";

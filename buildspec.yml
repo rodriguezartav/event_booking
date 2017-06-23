@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - echo Installing Mocha...
-      - npm install -g mocha
       - npm install -g knex
   pre_build:
     commands:
@@ -16,10 +15,9 @@ phases:
       - echo Build started on `date`
       - echo Compiling the Node.js code
       - ./migrate.sh
-      - npm test
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
-    - ./report.json
+    - ./stats.json

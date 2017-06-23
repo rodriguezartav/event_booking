@@ -1,0 +1,38 @@
+
+
+.slds-truncate{
+  text-transform: capitalize;
+}
+
+.capitalize{
+ text-transform: capitalize;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.pointer h3, .pointer p{
+  cursor: pointer;
+}
+
+.slds-page-header{
+  background-color: #0058b0;
+  color: #fff;
+}
+
+
+.slds-icon-standard-account{
+  background-color: #0058b0;
+}
+
+.slds-page-header .slds-icon_container{
+  background: none;
+}
+
+.slds-page-header .slds-icon_container .slds-icon{
+  width: 3rem;
+  height: 3rem;
+}
+
+

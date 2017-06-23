@@ -8,7 +8,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       host: "localhost",
-      database: "",
+      database: process.env.DB_NAME,
       user:     "",
       password: ""
     },

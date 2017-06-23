@@ -1,20 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   cache: true,
   context: path.resolve(__dirname, 'src'),
   entry: {
-   app: ['react-hot-loader/patch','./app.jsx']
+   admin: ['react-hot-loader/patch','webpack/hot/only-dev-server','webpack-dev-server/client?http://localhost:8080','./apps/admin/index.jsx'],
+   web: ['react-hot-loader/patch','webpack/hot/only-dev-server','webpack-dev-server/client?http://localhost:8080','./apps/web/index.jsx'],
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist','assets'),
-    publicPath: '/assets/',                          // New
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',                          // New
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    hot:true
+    contentBase: [path.join(__dirname, "src")],
+    hot: true,
   },
   resolve: {
      extensions: ['.js', '.jsx']
@@ -51,10 +53,17 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
-     // new webpack.HotModuleReplacementPlugin()
-
-
-
-      ],
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src','template.html'),
+      filename: 'admin.html',
+      chunks: ['admin','style'],
+      inject: 'body'
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src','template.html'),
+      filename: 'index.html',
+      chunks: ['web','style'],
+      inject: 'body'
+    })
+  ],
 };

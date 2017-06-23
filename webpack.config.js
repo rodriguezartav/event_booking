@@ -9,12 +9,13 @@ var CompressionPlugin = require("compression-webpack-plugin");
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    app: './app.jsx'
+    admin: './apps/admin/index.jsx',
+    web: './apps/web/index.jsx',
   },
   output: {
     filename: '[name].[hash].js',
-    path: path.resolve(__dirname, './dist/assets'),
-    publicPath: '/assets',                          // New
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/',                          // New
   },
   resolve: {
      extensions: ['.js', '.jsx']
@@ -53,7 +54,7 @@ module.exports = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new CleanWebpackPlugin(["dist/*/*.*"], {verbose: true}),
+    new CleanWebpackPlugin(["dist/*.js","dist/*.css","dist/*.html","dist/*.map","dist/*.gz"], {verbose: true}),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.UglifyJsPlugin({
          sourceMap: true,
@@ -64,9 +65,15 @@ module.exports = {
           allChunks: true,
         }),
       new HtmlWebpackPlugin({
-        template: './index.html',
+        template: './template.html',
         filename: '../index.html',
-        chunks: ['app','style'],
+        chunks: ['web','style'],
+        inject: 'body'
+      }),
+      new HtmlWebpackPlugin({
+        template: './template.html',
+        filename: '../admin.html',
+        chunks: ['admin','style'],
         inject: 'body'
       }),
      new CompressionPlugin({
