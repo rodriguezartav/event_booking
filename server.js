@@ -2,21 +2,6 @@ var port = process.env.PORT || 3000;
 var express = require('express');
 process.env.BABEL_ENV = 'server';
 
-require('babel-core/register')({
-  presets: ['es2015', 'react'],
-  "env": {
-    "server": {
-     "plugins": [
-      [
-        "css-modules-transform", {
-          "generateScopedName": "[hash:8]",
-          "extensions": [".css"]
-        }
-      ]]
-    }
-  }
-});
-
 
 var app = express();
 var ReactServer = require("./server/serverReact.js");
@@ -37,11 +22,6 @@ app.use( knex );
 app.use( "/reservaciones", reservaciones );
 app.use( "/pacientes", pacientes );
 app.use( "/pagos", pagos );
-
-app.get("/", function(req,res){
-  var reactServer = new ReactServer();
-  res.send(reactServer.generateHtml());
-})
 
 app.use(express.static('dist'))
 
