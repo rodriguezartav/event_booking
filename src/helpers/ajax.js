@@ -1,13 +1,10 @@
-var apiURL = process.env.API_URL;
-if(apiURL == "_") apiURL = "";
-var url = apiURL || "http://localhost:3000";
-var location = "";
-try{
-  if (typeof window !== 'undefined') window = {location: ""};
-  if(location.href.indexOf("localhost")==-1) url ="";
-}catch(e){
 
+var url = "http://localhost:3000";
+if( process.env.NODE_ENV === "production" ){
+  url = "";
 }
+console.log(url);
+console.log(process.env.NODE_ENV);
 
 var Ajax = {}
 Ajax.get = function(business,path){
