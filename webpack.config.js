@@ -66,13 +66,13 @@ module.exports = {
         }),
       new HtmlWebpackPlugin({
         template: './template.html',
-        filename: '../index.html',
+        filename: 'index.html',
         chunks: ['web','style'],
         inject: 'body'
       }),
       new HtmlWebpackPlugin({
         template: './template.html',
-        filename: '../admin.html',
+        filename: 'admin.html',
         chunks: ['admin','style'],
         inject: 'body'
       }),
