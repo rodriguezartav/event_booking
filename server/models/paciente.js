@@ -94,6 +94,13 @@ exports.create = function(knex,body){
       body.paciente.id = result[0]
       body.reservacion.paciente_id = result[0];
       body.reservacion.saldo = body.reservacion.monto;
+
+      return knex.table("reservacion")
+      .select("*")
+      .where({paciente_id: body.paciente.id})
+    })
+    .then(function(result){
+      if( result.length > 0 ) throw new errors.Forbidden("Ya existe una reservacion, solo se puede tener una reservacion por cada email. Contacte a carolinadada@hotmail.com para hacer otra.");
       return knex.table("reservacion")
       .returning('id')
       .transacting(trx)
@@ -101,8 +108,9 @@ exports.create = function(knex,body){
     })
     .then(function(result){
       body.reservacion.id = result[0];
+      return body;
     })
-  }).then(function(){
+  }).then(function(body){
     return triggerSNS("registrado",body.paciente.id)
   })
 }
