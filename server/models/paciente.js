@@ -1,6 +1,8 @@
 var errors = require('throw.js');
 var AWS = require('aws-sdk');
 AWS.config.update({region:'us-east-1'});
+var sqs = new AWS.SQS();
+var Promise = require("bluebird");
 
 var Promise = require("bluebird");
 var sns = new AWS.SNS();
@@ -111,7 +113,7 @@ exports.create = function(knex,body){
       return body;
     })
   }).then(function(body){
-    return triggerSNS("registrado",body.paciente.id)
+    return QueueMessage({email:"registrado",paciente_id: body.paciente.id});
   })
 }
 
@@ -129,33 +131,23 @@ exports.destroy = function(knex, id){
   .where({id: id})
 }
 
-function triggerSNS(email, pacienteId){
-    return new Promise(function(resolve,reject){
 
-    var endpointArn = 'arn:aws:sns:us-east-1:246741407701:hello-topic';
+function QueueMessage(event){
+  var params = {
+    MessageBody: JSON.stringify(event), /* required */
+    QueueUrl: 'https://sqs.us-east-1.amazonaws.com/246741407701/emailbulk.fifo', /* required */
+    DelaySeconds: 0,
+    MessageDeduplicationId: Math.random() + 'a',
+    MessageGroupId: 'GROUP1'
+  };
 
-    var payload = {
-
-      "default": JSON.stringify({email: email, paciente_id: pacienteId}),
-      "lambda": JSON.stringify({email: email, paciente_id: pacienteId}),
-
-    };
-
-    // first have to stringify the inner APNS object...
-
-    // then have to stringify the entire message payload
-    payload = JSON.stringify(payload);
-
-    sns.publish({
-      Message: payload,
-      MessageStructure: 'json',
-      TargetArn: endpointArn
-    }, function(err, data) {
-      if (err) reject(err);
-      else resolve(data);
-
-    });
-  });
-
-
+  var promise = function(resolve, reject){
+    sqs.sendMessage(params, function(err, res){
+       if(err) reject(err);
+       else resolve(res);
+     });
+  }
+  return new Promise(promise);
 }
+
+module.exports = DeleteQueueMessage
