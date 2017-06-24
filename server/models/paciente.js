@@ -1,4 +1,11 @@
 var errors = require('throw.js');
+var AWS = require('aws-sdk');
+AWS.config.update({region:'us-east-1'});
+
+var Promise = require("bluebird");
+var sns = new AWS.SNS();
+
+
 
 exports.list = function(knex){
   var result = {};
@@ -94,8 +101,9 @@ exports.create = function(knex,body){
     })
     .then(function(result){
       body.reservacion.id = result[0];
-      return body;
     })
+  }).then(function(){
+    return triggerSNS("registrado",body.paciente.id)
   })
 }
 
@@ -111,4 +119,35 @@ exports.destroy = function(knex, id){
   return knex.table("paciente")
   .delete()
   .where({id: id})
+}
+
+function triggerSNS(email, pacienteId){
+    return new Promise(function(resolve,reject){
+
+    var endpointArn = 'arn:aws:sns:us-east-1:246741407701:hello-topic';
+
+    var payload = {
+
+      "default": JSON.stringify({email: email, paciente_id: pacienteId}),
+      "lambda": JSON.stringify({email: email, paciente_id: pacienteId}),
+
+    };
+
+    // first have to stringify the inner APNS object...
+
+    // then have to stringify the entire message payload
+    payload = JSON.stringify(payload);
+
+    sns.publish({
+      Message: payload,
+      MessageStructure: 'json',
+      TargetArn: endpointArn
+    }, function(err, data) {
+      if (err) reject(err);
+      else resolve(data);
+
+    });
+  });
+
+
 }
