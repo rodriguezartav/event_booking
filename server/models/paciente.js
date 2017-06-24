@@ -4,7 +4,6 @@ AWS.config.update({region:'us-east-1'});
 var sqs = new AWS.SQS();
 var Promise = require("bluebird");
 
-var Promise = require("bluebird");
 var sns = new AWS.SNS();
 
 
