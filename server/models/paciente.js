@@ -149,4 +149,3 @@ function QueueMessage(event){
   return new Promise(promise);
 }
 
-module.exports = DeleteQueueMessage
