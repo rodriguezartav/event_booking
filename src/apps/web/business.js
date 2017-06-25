@@ -65,8 +65,8 @@ Business.prototype.onSave = function(){
     return response.json();
   })
   .then( function(json){
-    console.log(json);
-    if(json.paciente) _this.app.setState({view: "complete",saving: false});
+    if(!json) return true;
+    if(!json.message) _this.app.setState({view: "complete",saving: false});
     else if(json.message == "email") _this.app.setState({saving: false, error: "Ya existe una reservacion con ese email! Contacte a carolinadada@hotmail.com" });
     else if(json.message == "celular") _this.app.setState({saving: false, error: "Ya existe una reservacion con este telefono, si no tiene telefono use su numero de pasaporte; o Contacte a carolinadada@hotmail.com" });
   })
