@@ -1,5 +1,6 @@
 var Ajax = require("../../helpers/ajax");
 
+
 function Business(app){
   var _this = this;
   this.app = app;
@@ -71,6 +72,7 @@ Business.prototype.onSave = function(){
     else if(json.message == "celular") _this.app.setState({saving: false, error: "Ya existe una reservacion con este telefono, si no tiene telefono use su numero de pasaporte; o Contacte a carolinadada@hotmail.com" });
   })
   .catch( function(e){
+    _this.app.setState({saving: false, error: "Ocurrio un error de conexion, favor intente de nuevo o contacte a roberto@3vot.com" });
     console.log(e);
   })
 }

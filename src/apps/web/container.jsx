@@ -12,8 +12,7 @@ class Container extends React.Component {
     this.onMontoChange = this.onMontoChange.bind(this);
     this.onDiaChange = this.onDiaChange.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
-
-   this.onSave = this.onSave.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   onMontoChange(e){
@@ -34,7 +33,7 @@ class Container extends React.Component {
   }
 
   renderButtons(){
-    if( this.status.saving ) return false;
+    if( this.state.saving ) return null;
     else return <div>
       <button onClick={this.onSave} type="button" className="slds-button slds-button--brand">Reservar</button>
       <a style={{right: 10, position: "absolute"}} type="button" href="/admin.html" className="slds-float--right slds-button slds-button--neutral">Reservaciones</a>
