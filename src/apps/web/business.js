@@ -63,13 +63,14 @@ Business.prototype.onSave = function(){
   }
   Ajax.post(this,"/pacientes",body)
   .then( function(response){
+    console.log(response)
+    if(response.status==403) _this.app.setState({saving: false, error: "Ya existe una reservacion con ese email! Contacte a carolinadada@hotmail.com" });
+    else if(response.status==409) _this.app.setState({saving: false, error: "Ya existe una reservacion con este telefono, si no tiene telefono use su numero de pasaporte; o Contacte a carolinadada@hotmail.com" });
     return response.json();
   })
   .then( function(json){
     if(!json) return true;
     if(!json.message) _this.app.setState({view: "complete",saving: false});
-    else if(json.message == "email") _this.app.setState({saving: false, error: "Ya existe una reservacion con ese email! Contacte a carolinadada@hotmail.com" });
-    else if(json.message == "celular") _this.app.setState({saving: false, error: "Ya existe una reservacion con este telefono, si no tiene telefono use su numero de pasaporte; o Contacte a carolinadada@hotmail.com" });
   })
   .catch( function(e){
     _this.app.setState({saving: false, error: "Ocurrio un error de conexion, favor intente de nuevo o contacte a roberto@3vot.com" });
