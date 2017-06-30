@@ -58,7 +58,7 @@ exports.list = function(knex){
       jueves+=r.jueves;
       sabado+=r.sabado;
       domingo+=r.domingo;
-      r.saldo += r.saldo;
+      saldo += r.saldo;
     })
     result.pagos.forEach(function(p){
       pago += p.monto;
