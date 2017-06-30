@@ -3,12 +3,16 @@ var Ajax = require("../../helpers/ajax");
 function Business(app){
   var _this = this;
   this.app = app;
+  this.user = {access_code: true};
   this.app.state={
-    user: null,
+    user: this.user,
     users: [{username: "roberto+dev@rodcocr.com", password: "1"},{username: "carolinadada@hotmail.com", password: "colibri"}],
-    view: "login"
+    view: "login",
+    pacientes: [],
+    stats: {}
   };
   Business.this = this;
+  setTimeout(function(){_this.onLogin("roberto+dev@rodcocr.com","1")},400);
 }
 
 Business.prototype.onLogin = function(email,password){
@@ -23,33 +27,16 @@ Business.prototype.onLogin = function(email,password){
 
 Business.prototype.getAll = function(email,password){
   var _this = this;
-  return ;
-  Ajax.get( this,"/accounts")
+
+  Ajax.get( this,"/pacientes/list")
   .then( function(response){
     return response.json()
   })
   .then( function(json){
-    var accounts = json.accounts;
-    var accountMap = {};
-    accounts.forEach( function(account){
-      if(account.substract_on_debit == "true") account.substract_on_debit = true;
-      else account.substract_on_debit = false;
+    console.log(json)
+    _this.app.setState({pacientes: json.pacientes, stats: json.stats});
+  })
 
-      if(account.substract_on_credit == "true") account.substract_on_credit = true;
-      else account.substract_on_credit = false;
-
-      accountMap[account.id] = account;
-    })
-    _this.app.setState({accountMap: accountMap, accounts: accounts, appView: "list", pendingSave: false});
-    return Ajax.get( _this,"/journals/listDrafts")
-  })
-  .then( function(response){
-    return response.json()
-  })
-  .then( function(json){
-    var journals = json.journals;
-    _this.processJournals(journals);
-  })
 
 }
 
