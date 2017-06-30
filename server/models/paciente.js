@@ -66,6 +66,7 @@ exports.list = function(knex){
     result.stats = {
       total: total,
       jueves: jueves,
+      sabado: sabado,
       domingo: domingo,
       saldo: saldo,
       pago: pago

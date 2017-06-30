@@ -51,8 +51,9 @@ class PacienteListItem extends React.Component {
                 </li>
               </ul>
               <ul className="slds-post__footer-meta-list slds-list_horizontal slds-has-dividers_right slds-text-title">
-                <li className="slds-item">{item.reservacion.monto} Total</li>
-                <li className="slds-item">{item.reservacion.saldo} Saldo</li>
+                <li className="slds-item">{item.reservacion.jueves ? "Jueves" : null}</li>
+                <li className="slds-item">{item.reservacion.sabado ? "Sabado" : null}</li>
+                <li className="slds-item">{item.reservacion.domingo ? "Domingo" : null}</li>
               </ul>
             </footer>
           </article>
