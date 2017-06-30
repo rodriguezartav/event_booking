@@ -89,6 +89,14 @@ class Container extends React.Component {
       <input data-name="nombre" onChange={this.onChangeText} ref="nombre" type="text"  className="slds-input" placeholder="Nombre de quien reserva" />
     </div>
   </div>
+
+  <div className="slds-form-element">
+    <label className="slds-form-element__label" >Apellido</label>
+    <div className="slds-form-element__control">
+      <input data-name="apellido" onChange={this.onChangeText} ref="apellido" type="text"  className="slds-input" placeholder="(requerido)" />
+    </div>
+  </div>
+
   <div className="slds-form-element">
     <label className="slds-form-element__label">Email</label>
     <div className="slds-form-element__control">

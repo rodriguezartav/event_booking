@@ -10,6 +10,7 @@ function Business(app){
     dias: [],
     monto: 0,
     nombre: null,
+    apellido: null,
     email: null,
     celular: null,
     error: null,
@@ -40,6 +41,7 @@ Business.prototype.onSave = function(){
   var _this = this;
   var state = this.app.state;
   if(!this.isNameValid()) return;
+  if(!this.isApellidoValid()) return;
   if(!this.isEmailValid()) return;
   if(!this.isCelularValid()) return;
   if(!this.isPersonasValid()) return;
@@ -48,7 +50,7 @@ Business.prototype.onSave = function(){
 
   var body = {
     "paciente":{
-      "nombre": state.nombre,
+      "nombre": state.nombre + ' ' + state.apellido,
       "email": state.email,
       "telefono":state.celular,
     },
@@ -158,8 +160,17 @@ Business.prototype.isCelularValid = function(){
 
 Business.prototype.isNameValid = function(){
 
-  if( !this.app.state.nombre || this.app.state.nombre.length < 3){
-    this.app.setState({error: "Falto ingresar su nombre y apellido completo"})
+  if( !this.app.state.nombre || this.app.state.apellido == "" || this.app.state.nombre.length < 3){
+    this.app.setState({error: "Falto ingresar su nombre"})
+    return false;
+  }
+  return true;
+}
+
+Business.prototype.isApellidoValid = function(){
+
+  if( !this.app.state.apellido || this.app.state.apellido == "" || this.app.state.apellido.length < 3){
+    this.app.setState({error: "Falto ingresar su apellido"})
     return false;
   }
   return true;

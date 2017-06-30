@@ -3,22 +3,25 @@ var Ajax = require("../../helpers/ajax");
 function Business(app){
   var _this = this;
   this.app = app;
-  this.user = {access_code: true};
+  var user = localStorage.getItem('user');
+  if(user) _this.user = JSON.parse(user);
   this.app.state={
-    user: this.user,
-    users: [{username: "roberto+dev@rodcocr.com", password: "1"},{username: "carolinadada@hotmail.com", password: "colibri"}],
-    view: "login",
+    users: [{username: "roberto@rodcocr.com", password: "monomono"},{username: "carolinadada@hotmail.com", password: "colibri"}],
+    view: this.user ? "home" : "login",
     pacientes: [],
     stats: {}
   };
   Business.this = this;
-  setTimeout(function(){_this.onLogin("roberto+dev@rodcocr.com","1")},400);
+  if(this.user) this.getAll();
+  //setTimeout(function(){_this.onLogin("roberto+dev@rodcocr.com","1")},400);
 }
 
 Business.prototype.onLogin = function(email,password){
   var _this = Business.this;
   _this.app.state.users.forEach( function(user){
     if( user.username == email && user.password == password ){
+      _this.user = {email: email, password: password, access_code: true};
+      localStorage.setItem("user",JSON.stringify(_this.user));
       _this.app.setState({user: user, view: "home"})
       _this.getAll();
     }
