@@ -117,10 +117,10 @@ exports.create = function(knex,body){
   })
 }
 
-exports.update = function(knex, id,report){
+exports.update = function(knex, paciente){
   return knex.table("paciente")
-  .update(report)
-  .where({id: id})
+  .update(paciente)
+  .where({id: paciente.id})
   .returning('*')
 }
 

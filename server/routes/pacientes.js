@@ -7,7 +7,19 @@ var admin = require("../middleware/admin");
 
 
 router.post('/', function(req,res,next){
-  paciente.create(req.knex, req.body )
+  var operation;
+  if( req.body.id ){
+    var pacienteObj = {
+      nombre: req.body.nombre,
+      email: req.body.email,
+      telefono: req.body.telefono,
+      id: req.body.id
+    }
+    operation = paciente.update(req.knex, pacienteObj);
+  }
+  else operation = paciente.create(req.knex, req.body )
+
+  operation
   .then( function(result){
      res.status(200).json(result)
    })
@@ -20,16 +32,6 @@ router.post('/', function(req,res,next){
     })
 });
 
-router.put('/:id', admin ,function(req,res,next){
-  paciente.update( req.knex,req.params.id,req.body )
-  .then( function(result){
-     res.status(200).json({paciente:result[0]})
-   })
-   .catch( function(err){
-     if(err.statusCode) next(err);
-     else next( new errors.InternalServerError(err) )
-    })
-});
 
 router.get('/list', admin ,function(req,res,next){
   paciente.list( req.knex)

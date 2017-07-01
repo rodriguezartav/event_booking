@@ -106,7 +106,7 @@ class Container extends React.Component {
   <div className="slds-form-element">
     <label className="slds-form-element__label" >Celular</label>
     <div className="slds-form-element__control">
-    <input data-name="celular"  onChange={this.onChangeText} ref="celular" type="text" className="slds-input" placeholder="# Pasaporte si no tiene celular" />
+    <input data-name="celular"  onChange={this.onChangeText} ref="celular" type="number" className="slds-input" placeholder="# Pasaporte si no tiene celular" />
     </div>
   </div>
 

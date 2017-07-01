@@ -6,20 +6,10 @@ var auth = require("../middleware/auth");
 var admin = require("../middleware/admin");
 
 
-router.post('/', auth, function(req,res,next){
-  reservacion.create(req.knex, req.body )
+router.post('/', admin, function(req,res,next){
+  reservacion.update(req.knex, req.body )
   .then( function(result){
-     res.status(200).json({reservacion:result[0]})
-   })
-   .catch( function(err){
-     if(err.statusCode) next(err);
-     else next( new errors.InternalServerError(err) )
-    })
-});
-router.put('/:id', admin ,function(req,res,next){
-  reservacion.update( req.knex,req.params.id,req.body )
-  .then( function(result){
-     res.status(200).json({reservacion:result[0]})
+     res.status(200).json(result[0])
    })
    .catch( function(err){
      if(err.statusCode) next(err);

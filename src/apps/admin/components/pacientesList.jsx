@@ -1,24 +1,30 @@
 import React from 'react';
 import moment from 'moment';
+import Stat from "./stat";
+import Business from "../business"
+var business;
 
 class PacienteListItem extends React.Component {
 
   constructor(props) {
     super(props);
+    business= Business.business;
+    this.onSelect = this.onSelect.bind(this);
   }
 
-
+  onSelect(){
+    business.onSelectPaciente(this.props.item)
+  }
 
   render(){
     var _this = this;
     var item = this.props.item;
-    console.log(item)
     return <li className="slds-feed__item">
           <article className="slds-post">
             <header className="slds-post__header slds-media">
               <div className="slds-media__body">
                 <div className="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
-                  <p><a>{item.nombre}</a> — <a></a></p>
+                  <p><a onClick={this.onSelect}>{item.nombre}</a> — <a></a></p>
 
                 </div>
                 <p className="slds-text-body_small"><a href="javascript:void(0);" title="Click for single-item view of this post" className="slds-text-link_reset">
@@ -69,20 +75,35 @@ class PacienteList extends React.Component {
     super(props);
   }
 
+  renderStats(){
+    return <div className="slds-size--5-of-12 slds-m-around--large slds-grid">
+
+      <Stat dia="Jueves" fecha="Agosto 24" pacientes={this.props.stats.jueves}/>
+
+      <Stat dia="Sabado" fecha="Agosto 26" pacientes={this.props.stats.sabado}/>
+
+      <Stat dia="Domingo" fecha="Agosto 27" pacientes={this.props.stats.domingo}/>
+
+    </div>
+  }
+
   renderItems(){
     var _this = this;
     return this.props.items.map( function(item){
-      return <PacienteListItem select={_this.props.onSelect} key={item.id} item={item} />
+      return <PacienteListItem onSelect={_this.props.onSelect} key={item.id} item={item} />
     } )
   }
 
 
   render(){
 
-     return  <div className="slds-feed">
+     return  <div className="slds-size--5-of-12 ">
+     {this.renderStats()}
+     <div className="slds-feed">
         <ul className="slds-feed__list">
         {this.renderItems()}
         </ul>
+      </div>
       </div>
   }
 }
