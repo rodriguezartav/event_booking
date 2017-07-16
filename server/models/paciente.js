@@ -11,6 +11,7 @@ var sns = new AWS.SNS();
 exports.list = function(knex){
   var result = {};
   var pacienteMap = {};
+  var reservacionMap ={}
 
   return knex.table("paciente")
   .select("*")
@@ -28,6 +29,7 @@ exports.list = function(knex){
   .then( function(res){
     result.reservaciones = res;
     res.forEach(function(r){
+      reservacionMap[r.id] = r;
       pacienteMap[r.paciente_id].reservacion = r;
     })
     return knex.table("pago")
@@ -36,7 +38,10 @@ exports.list = function(knex){
   .then( function(res){
     result.pagos = res || [];
     res.forEach(function(r){
-      pacienteMap[r.paciente_id].pagos.push(r);
+      var reservacion = reservacionMap[r.reservacion_id];
+      var paciente = pacienteMap[reservacion.paciente_id];
+      if(!paciente.pagos) paciente.pagos = [];
+      paciente.pagos.push(r);
     });
     return knex.table("email")
     .select("*")

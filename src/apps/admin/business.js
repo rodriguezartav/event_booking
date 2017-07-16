@@ -21,10 +21,10 @@ function Business(app){
 Business.business = null;
 
 Business.prototype.onLogin = function(email,password){
-  var _this = Business.this;
+  var _this = Business.business;
   _this.app.state.users.forEach( function(user){
     if( user.username == email && user.password == password ){
-      _this.user = {email: email, password: password, access_code: true};
+      _this.user = {email: email, password: password, access_code: "abcdef"};
       localStorage.setItem("user",JSON.stringify(_this.user));
       _this.app.setState({user: user, view: "home"})
       _this.getAll();
@@ -106,5 +106,34 @@ Business.prototype.savePaciente = function(paciente){
     _this.app.setState({error: "Occurio un error. Si continuan los problemas escriba a roberto@3vot.com. " + JSON.stringify(err)})
   })
 }
+
+Business.prototype.createPago = function(monto, detalles){
+  this.app.setState({pendingSave: true});
+  var _this = this;
+  var pago = {reservacion_id: this.app.state.paciente.reservacion.id, monto: monto, detalles: detalles};
+  Ajax.post( this,"/pagos",pago)
+  .then( function(response){
+    return response.json()
+  })
+  .then( function(json){
+    if(json.message) _this.app.setState({error: "Ocurrio un error sin identificar. " + json.message, pendingSave: false})
+    else if(json){
+      var paciente = _this.app.state.paciente;
+      if(!paciente.pagos) paciente.pagos = [];
+      pago = json.pago;
+      paciente.pagos.push(pago);
+      paciente.reservacion = json.reservacion;
+      if(!paciente.update) paciente.update = 0;
+      paciente.update++;
+      _this.app.setState({paciente:paciente, pendingSave:false,error:null});
+    }
+  })
+  .catch( function(err){
+    console.log(err);
+    _this.app.setState({error: "Occurio un error. Si continuan los problemas escriba a roberto@3vot.com. " + JSON.stringify(err)})
+  })
+}
+
+
 
 module.exports = Business;

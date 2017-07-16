@@ -21,7 +21,7 @@ class Stat extends React.Component {
           <div className="slds-panel__section">
             <ul>
               <li className="slds-form-element slds-hint-parent slds-border_bottom">
-                <span className="slds-form-element__label">Pacientes Reservados</span>
+                <span className="slds-form-element__label">{this.props.showLegend == false ? "Todos los dias" : "Pacientes Reservados"}</span>
                 <div className="slds-form-element__control">
                   <h3 className="slds-text-heading_small slds-m-bottom_medium">{this.props.pacientes || 0}</h3>
 

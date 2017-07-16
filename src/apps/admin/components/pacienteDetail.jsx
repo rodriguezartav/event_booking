@@ -44,7 +44,6 @@ class ReservacionDetail extends React.Component {
   }
 
   render(){
-
        return <div>
 
        <div className="demo-only" style={{background:"#f4f6f9",padding:"1rem"}}>
@@ -80,6 +79,14 @@ class ReservacionDetail extends React.Component {
                 <label className="slds-form-element__label" >Monto</label>
                 <div className="slds-form-element__control">
                   <input type="number"  ref="monto" className="slds-input" defaultValue={this.props.item.monto}/>
+                </div>
+              </div>
+
+              <div className="slds-form-element  slds-m-top--small">
+                <label className="slds-form-element__label" >Saldo</label>
+                <div className="slds-form-element__control">
+                  <label className="slds-form-element__label slds-text-heading_small">$ {this.props.item.saldo}</label>
+
                 </div>
               </div>
 
@@ -167,29 +174,73 @@ class PagoDetail extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      view: "list"
+    }
   }
 
   onShowPagoCreate(){
-    business.onShowPagoCreate(this.props.item);
+    this.setState({view: "create"})
+  }
+
+  onCreatePago(){
+    Business.business.createPago(parseInt(this.refs.monto.value), this.refs.detalles.value);
+    this.setState({view: "list"})
   }
 
   renderItems(){
     return this.props.items.map(function(item){
-      return <tr>
+      return <tr key={item.id}>
         <th scope="row" data-label="Opportunity Name">
-          <div className="slds-truncate" ><a>{item.referencia}</a></div>
+          <div className="slds-truncate">{item.detalles}</div>
         </th>
-        <td data-label="Account Name">
-          <div className="slds-truncate">{item.created}</div>
-        </td>
+
         <td data-label="Close Date">
-          <div className="slds-truncate">${item.monto}</div>
+          <div className="slds-truncate">$ {item.monto}</div>
         </td>
       </tr>
     })
   }
 
-  render(){
+  renderRegister(){
+     return <div className="slds-col  demo-only slds-grid" style={{background:"#f4f6f9",padding:"1rem"}}>
+    <div className="slds-panel slds-grid slds-grid_vertical slds-nowrap slds-is-editing">
+      <div className="slds-form slds-form_stacked slds-grow slds-scrollable_y">
+
+        <div className="slds-panel__section">
+          <h3 className="slds-text-heading_small slds-m-bottom_medium">Registrar Pago</h3>
+
+          <div className="slds-form slds-form_stacked">
+            <div className="slds-form-element">
+              <label className="slds-form-element__label" htmlFor="input-id-01">Monto</label>
+              <div className="slds-form-element__control">
+                <input ref="monto" type="number" id="input-id-01" className="slds-input" placeholder="ie: 350"/>
+              </div>
+            </div>
+            <div className="slds-form-element">
+              <label className="slds-form-element__label" htmlFor="input-id-01">Referencia</label>
+              <div className="slds-form-element__control">
+                <input ref="detalles" type="text" id="input-id-01" className="slds-input" placeholder="ie: Banco Nacionl #4483738"/>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="slds-form-element__control slds-m-top--large">
+              <SaveButton pendingSave={this.props.pendingSave} label="Guardar" onSave={this.onCreatePago.bind(this)} />
+              <a className="slds-button slds-button__neutral">Cancelar</a>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }
+
+
+  renderList(){
        return <div>
 
        <div className="slds-col  demo-only slds-grid" style={{background:"#f4f6f9",padding:"1rem"}}>
@@ -205,9 +256,7 @@ class PagoDetail extends React.Component {
                   <th scope="col">
                     <div className="slds-truncate" title="Opportunity Name">Numero</div>
                   </th>
-                  <th scope="col">
-                    <div className="slds-truncate" title="Account Name">Fecha</div>
-                  </th>
+
                   <th scope="col">
                     <div className="slds-truncate" title="Close Date">Monto</div>
                   </th>
@@ -220,7 +269,7 @@ class PagoDetail extends React.Component {
             </table>
             <div className="slds-form-element slds-m-top--large">
               <div className="slds-form-element__control">
-                <SaveButton pendingSave={this.props.pendingSave} label="Registrar Pago" onSave={this.onShowPagoCreate} />
+                <SaveButton pendingSave={this.props.pendingSave} label="Registrar Pago" onSave={this.onShowPagoCreate.bind(this)} />
               </div>
             </div>
           </div>
@@ -231,6 +280,11 @@ class PagoDetail extends React.Component {
 
         </div>
     </div>
+  }
+
+  render(){
+    if(this.state.view =="list") return this.renderList();
+    else return this.renderRegister();
   }
 }
 

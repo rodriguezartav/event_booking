@@ -6,10 +6,10 @@ var auth = require("../middleware/auth");
 var admin = require("../middleware/admin");
 
 
-router.post('/', auth, function(req,res,next){
+router.post('/', function(req,res,next){
   pago.create(req.knex, req.body )
   .then( function(result){
-     res.status(200).json({pago:result[0]})
+     res.status(200).json({pago:result[0],reservacion: result[1]})
    })
    .catch( function(err){
      if(err.statusCode) next(err);

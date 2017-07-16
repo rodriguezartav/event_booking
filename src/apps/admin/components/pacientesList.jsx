@@ -36,14 +36,14 @@ class PacienteListItem extends React.Component {
 
             <footer className="slds-post__footer">
               <ul className="slds-post__footer-actions-list slds-list_horizontal">
-                <li className="slds-col slds-item slds-m-right_medium">
+                <li style={{width: 130}} className="slds-col slds-item slds-m-right_x-">
                   <button title="Like this item" className="slds-button_reset slds-post__footer-action" aria-pressed="false">
                     <svg className="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle" aria-hidden="true">
                       <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#phone_portrait"></use>
                     </svg>{item.telefono}</button>
                 </li>
 
-                <li className="slds-col slds-item slds-m-right_medium">
+                <li className="slds-col slds-item slds-m-right_large">
                   <button title="Share this item" className="slds-button_reset slds-post__footer-action">
                     <svg className="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle" aria-hidden="true">
                       <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#user"></use>
@@ -53,7 +53,7 @@ class PacienteListItem extends React.Component {
                   <button title="Comment on this item" className="slds-button_reset slds-post__footer-action">
                     <svg className="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle" aria-hidden="true">
                       <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#moneybag"></use>
-                    </svg> saldo {item.reservacion.saldo} </button>
+                    </svg> saldo $ {item.reservacion.saldo} </button>
                 </li>
               </ul>
               <ul className="slds-post__footer-meta-list slds-list_horizontal slds-has-dividers_right slds-text-title">
@@ -83,6 +83,11 @@ class PacienteList extends React.Component {
       <Stat dia="Sabado" fecha="Agosto 26" pacientes={this.props.stats.sabado}/>
 
       <Stat dia="Domingo" fecha="Agosto 27" pacientes={this.props.stats.domingo}/>
+
+      <Stat dia="Total" fecha="vendido"  showLegend={false} pacientes={this.props.stats.total}/>
+
+      <Stat dia="Saldo" fecha="por cobrar" showLegend={false}  pacientes={this.props.stats.saldo}/>
+
 
     </div>
   }

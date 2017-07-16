@@ -29,7 +29,7 @@ class LoginContainer extends React.Component {
           </div>
 
           <div className="slds-modal__content slds-p-around--medium">
-            <LoginForm handleFormClick={this.handleFormClick}/>
+            <LoginForm handleFormClick={this.handleFormClick.bind(this)}/>
           </div>
 
           <div className="slds-modal__footer">
