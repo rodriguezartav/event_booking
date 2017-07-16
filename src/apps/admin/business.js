@@ -64,7 +64,7 @@ Business.prototype.onSendBillingEmail = function(){
 
 Business.prototype.saveReservacion = function(reservacion){
 
-  this.app.setState({pendingSave: true});
+  this.app.setState({pendingSave: true,error: null});
   var _this = this;
   Ajax.post( this,"/reservaciones",reservacion)
   .then( function(response){
@@ -90,7 +90,7 @@ Business.prototype.saveReservacion = function(reservacion){
 }
 
 Business.prototype.savePaciente = function(paciente){
-  this.app.setState({pendingSave: true});
+  this.app.setState({pendingSave: true,error:null});
   var _this = this;
   Ajax.post( this,"/pacientes",paciente)
   .then( function(response){
@@ -108,7 +108,7 @@ Business.prototype.savePaciente = function(paciente){
 }
 
 Business.prototype.createPago = function(monto, detalles){
-  this.app.setState({pendingSave: true});
+  this.app.setState({pendingSave: true,error:null});
   var _this = this;
   var pago = {reservacion_id: this.app.state.paciente.reservacion.id, monto: monto, detalles: detalles};
   Ajax.post( this,"/pagos",pago)
