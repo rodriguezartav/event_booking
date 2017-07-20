@@ -111,25 +111,25 @@ class Container extends React.Component {
   </div>
 
   <fieldset className="slds-form-element">
-    <legend className="slds-form-element__legend slds-form-element__label">Dias</legend>
+    <legend className="slds-form-element__legend slds-form-element__label">Dias (Agosto 24, 26 y 27)</legend>
     <div className="slds-form-element__control">
       <div className="slds-checkbox--button-group">
         <span className="slds-button slds-checkbox--button" htmlFor="monday">
           <input ref="jueves" data-dia="jueves" onChange={this.onDiaChange}  type="checkbox" name="checkbox" id="monday" />
           <label className="slds-checkbox--button__label" htmlFor="monday">
-            <span className="slds-checkbox--faux">Jueves 24</span>
+            <span className="slds-checkbox--faux">Jueves</span>
           </label>
         </span>
         <span className="slds-button slds-checkbox--button" htmlFor="tuesday">
           <input ref="sabado" data-dia="jueves" onChange={this.onDiaChange} type="checkbox" name="checkbox" id="tuesday" />
           <label className="slds-checkbox--button__label" htmlFor="tuesday">
-            <span className="slds-checkbox--faux">Sabado 26</span>
+            <span className="slds-checkbox--faux">Sabado</span>
           </label>
         </span>
         <span className="slds-button slds-checkbox--button" htmlFor="wednesday">
           <input ref="domingo" data-dia="jueves" onChange={this.onDiaChange} type="checkbox" name="checkbox" id="wednesday" />
           <label className="slds-checkbox--button__label" htmlFor="wednesday">
-            <span className="slds-checkbox--faux">Domingo 27</span>
+            <span className="slds-checkbox--faux">Domingo</span>
           </label>
         </span>
 
@@ -138,7 +138,7 @@ class Container extends React.Component {
   </fieldset>
 
   <fieldset className="slds-form-element">
-    <legend className="slds-form-element__legend slds-form-element__label">Personas que va a asitir</legend>
+    <legend className="slds-form-element__legend slds-form-element__label">Personas que van a asitir</legend>
     <div className="slds-form-element__control">
       <div className="slds-radio--button-group">
         <span className="slds-button slds-radio--button">
