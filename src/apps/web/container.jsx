@@ -117,19 +117,19 @@ class Container extends React.Component {
         <span className="slds-button slds-checkbox--button" htmlFor="monday">
           <input ref="jueves" data-dia="jueves" onChange={this.onDiaChange}  type="checkbox" name="checkbox" id="monday" />
           <label className="slds-checkbox--button__label" htmlFor="monday">
-            <span className="slds-checkbox--faux">Jueves</span>
+            <span className="slds-checkbox--faux">Jueves 24</span>
           </label>
         </span>
         <span className="slds-button slds-checkbox--button" htmlFor="tuesday">
           <input ref="sabado" data-dia="jueves" onChange={this.onDiaChange} type="checkbox" name="checkbox" id="tuesday" />
           <label className="slds-checkbox--button__label" htmlFor="tuesday">
-            <span className="slds-checkbox--faux">Sabado</span>
+            <span className="slds-checkbox--faux">Sabado 26</span>
           </label>
         </span>
         <span className="slds-button slds-checkbox--button" htmlFor="wednesday">
           <input ref="domingo" data-dia="jueves" onChange={this.onDiaChange} type="checkbox" name="checkbox" id="wednesday" />
           <label className="slds-checkbox--button__label" htmlFor="wednesday">
-            <span className="slds-checkbox--faux">Domingo</span>
+            <span className="slds-checkbox--faux">Domingo 27</span>
           </label>
         </span>
 
