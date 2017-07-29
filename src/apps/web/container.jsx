@@ -84,24 +84,24 @@ class Container extends React.Component {
     <div className="slds-text-heading--large ">Ceremonia de Sanación del Taita Lucho</div>
 
     <div className="slds-text-body--small slds-m-bottom--large">Organizada por Carolina, en la Maloka Las Cusingas de Jane.</div>
-    <div className="slds-text-heading--small slds-m-bottom--large">Que bueno que estas aquí. Nos llena de alegría el que haya personas como vos y que el llamado de la vida te haya traido hasta aca.</div>
+    <div className="slds-text-heading--small slds-m-bottom--large">Que bueno que estas aquí. Utilizá esta página para avisarnos que vas a venir.</div>
 
     <div className="slds-text-heading--small">Si tienes dudas le puedes escribir a carolinadada@hotmail.com.</div>
     <div className="slds-text-body--small ">Links con mas informacion:</div>
 
     <div><a href="https://medium.com/mnto/imaginen-que-hay-un-medico-cf1c15189d40">
-      Imaginen que hay Medico - Ensayo
+      Imaginen que hay un Medico - Poesía
     </a></div>
 
-    <div><a href="https://www.youtube.com/watch?v=DsfjnmxoG24">
+    <div><a target="_blank" href="https://www.youtube.com/watch?v=DsfjnmxoG24">
       Video de Advertencias y Cuidados
     </a></div>
 
-    <div><a href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
+    <div><a  target="_blank" href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
       Video Charlas y Conferencias
     </a></div>
 
-    <div><a href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
+    <div><a  target="_blank" href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
       Video  Charlas y Conferencias
     </a></div>
 
