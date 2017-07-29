@@ -35,7 +35,9 @@ class Container extends React.Component {
   renderButtons(){
     if( this.state.saving ) return null;
     else return <div>
-      <button onClick={this.onSave} type="button" className="slds-button slds-button--brand">Reservar</button>
+      <button style={{backgroundColor: "#fef200, color: #333"}} onClick={this.onSave} type="button" className="slds-button slds-button--brand">
+        Reservar
+      </button>
       <a style={{right: 10, position: "absolute"}} type="button" href="/admin.html" className="slds-float--right slds-button slds-button--neutral">Reservaciones</a>
     </div>
   }
@@ -79,10 +81,31 @@ class Container extends React.Component {
     return <div className="slds-m-around--x-large slds-size--5-of-12 slds-p-bottom--x-large">
     {this.renderError()}
 
-    <div className="slds-text-heading--large slds-m-bottom--large">Hola!!</div>
-    <div className="slds-text-heading--small slds-m-bottom--large">Soy un programa hecho para ayudarte a reservar, si tenés problemas le podés escribir a mi creador. roberto@3vot.com</div>
+    <div className="slds-text-heading--large ">Ceremonia de Sanación del Taita Lucho</div>
 
-    <div className="slds-form--stacked " >
+    <div className="slds-text-body--small slds-m-bottom--large">Organizada por Carolina, en la Maloka Las Cusingas de Jane.</div>
+    <div className="slds-text-heading--small slds-m-bottom--large">Que bueno que estas aquí. Nos llena de alegría el que haya personas como vos y que el llamado de la vida te haya traido hasta aca.</div>
+
+    <div className="slds-text-heading--small">Si tienes dudas le puedes escribir a carolinadada@hotmail.com.</div>
+    <div className="slds-text-body--small ">Links con mas informacion:</div>
+
+    <div><a href="https://medium.com/mnto/imaginen-que-hay-un-medico-cf1c15189d40">
+      Imaginen que hay Medico - Ensayo
+    </a></div>
+
+    <div><a href="https://www.youtube.com/watch?v=DsfjnmxoG24">
+      Video de Advertencias y Cuidados
+    </a></div>
+
+    <div><a href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
+      Video Charlas y Conferencias
+    </a></div>
+
+    <div><a href="https://www.youtube.com/watch?v=Sz9k1If1lbY">
+      Video  Charlas y Conferencias
+    </a></div>
+
+    <div className="slds-form--stacked slds-m-top--large" >
   <div className="slds-form-element">
     <label className="slds-form-element__label" >Nombre</label>
     <div className="slds-form-element__control">
@@ -104,7 +127,7 @@ class Container extends React.Component {
     </div>
   </div>
   <div className="slds-form-element">
-    <label className="slds-form-element__label" >Celular</label>
+    <label className="slds-form-element__label" >Celular (lo usamos para asignar depositos SINPE)</label>
     <div className="slds-form-element__control">
     <input data-name="celular"  onChange={this.onChangeText} ref="celular" type="number" className="slds-input" placeholder="# Pasaporte si no tiene celular" />
     </div>
@@ -170,9 +193,10 @@ class Container extends React.Component {
     </div>
   </div>
 
+  <div className="slds-text-heading--medium slds-m-top--large">Problemas?: Escribí a roberto@3vot.com</div>
 
 
-    <div className="slds-docked-form-footer">
+    <div style={{backgroundColor: "#440e62"}} className="slds-docked-form-footer">
       {this.renderButtons()}
     </div>
 
@@ -181,8 +205,21 @@ class Container extends React.Component {
   }
 
   render(){
-    if(this.state.view == "home") return this.renderForm();
-    if(this.state.view == "complete") return this.renderComplete();
+    var body;
+    if(this.state.view == "home") body =  this.renderForm();
+    if(this.state.view == "complete") body =  this.renderComplete();
+
+    return <div><div className="slds-grid">
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#fef200", height:20}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#00a652", height:25}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#0054a5", height:30}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#855fa8 ",height:45}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#440e62", height:50}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#9d0b0d", height:55}}></div>
+      <div className="slds-size--3-of-12" style={{backgroundColor: "#f8931d", height:60}}></div>
+    </div>
+    {body}
+    </div>
   }
 }
 
