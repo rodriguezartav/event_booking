@@ -83,7 +83,7 @@ class Container extends React.Component {
 
     <div className="slds-text-heading--large ">Ceremonia de Sanación del Taita Lucho</div>
 
-    <div className="slds-text-body--small slds-m-bottom--large">Organizada por Carolina, en la Maloka Las Cusingas de Jane.</div>
+    <div className="slds-text-body--small slds-m-bottom--large">Organizada por Carolina y Jane.</div>
     <div className="slds-text-heading--small slds-m-bottom--large">Que bueno que estas aquí. Utilizá esta página para avisarnos que vas a venir.</div>
 
     <div className="slds-text-heading--small">Si tienes dudas le puedes escribir a carolinadada@hotmail.com.</div>
