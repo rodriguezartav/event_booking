@@ -90,7 +90,7 @@ class Container extends React.Component {
     <div className="slds-text-body--small ">Links con mas informacion:</div>
 
     <div><a href="https://medium.com/mnto/imaginen-que-hay-un-medico-cf1c15189d40">
-      Imaginen que hay un Medico - Poesía
+      Imaginen que hay un Medico - Relato
     </a></div>
 
     <div><a target="_blank" href="https://www.youtube.com/watch?v=DsfjnmxoG24">

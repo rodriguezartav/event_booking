@@ -14,18 +14,50 @@ function Business(app){
     email: null,
     celular: null,
     error: null,
-    saving: false
+    saving: false,
+    stats:{
+      jueves:0,
+      sabado: 0,
+      domingo:0
+    }
   };
   Business.this = this;
+  this.getAll();
+}
+
+Business.prototype.getAll = function(email,password){
+  var _this = this;
+  Ajax.get( this,"/reservaciones/getStat")
+  .then( function(response){
+    return response.json()
+  })
+  .then( function(json){
+    _this.app.setState({stats: json});
+    console.log(json)
+  })
+  .catch( function(err){
+    _this.app.setState({error: "Occurio un error cargando los pacientes, vuelva a cargar. Si continuan los problemas escriba a roberto@3vot.com. " + JSON.stringify(err)})
+  })
 }
 
 Business.prototype.onChangeDia = function(refs){
+  var _this = this;
   var dias = [];
-
-  if(refs["jueves"].checked) dias.push("jueves");
-  if(refs["sabado"].checked) dias.push("sabado");
-  if(refs["domingo"].checked) dias.push("domingo");
+  var stats = this.app.state.stats;
   var state = this.app.state
+  state.error = null;
+
+  function checkStat(dia){
+    if( stats[dia] > 45 ){
+      state.error= `El ${dia} ya llego a su capacidad maxima, favor escoja otro dia.`;
+      return false;
+    }
+    return true;
+  }
+
+  if(refs["jueves"].checked && checkStat("jueves")) dias.push("jueves");
+  if(refs["sabado"].checked && checkStat("sabado")) dias.push("sabado");
+  if(refs["domingo"].checked && checkStat("domingo")) dias.push("domingo");
   state.dias= dias;
   this.updateMonto(state);
 }
@@ -106,37 +138,7 @@ Business.prototype.onLogin = function(email,password){
   })
 }
 
-Business.prototype.getAll = function(email,password){
-  var _this = this;
-  return ;
-  Ajax.get( this,"/accounts")
-  .then( function(response){
-    return response.json()
-  })
-  .then( function(json){
-    var accounts = json.accounts;
-    var accountMap = {};
-    accounts.forEach( function(account){
-      if(account.substract_on_debit == "true") account.substract_on_debit = true;
-      else account.substract_on_debit = false;
 
-      if(account.substract_on_credit == "true") account.substract_on_credit = true;
-      else account.substract_on_credit = false;
-
-      accountMap[account.id] = account;
-    })
-    _this.app.setState({accountMap: accountMap, accounts: accounts, appView: "list", pendingSave: false});
-    return Ajax.get( _this,"/journals/listDrafts")
-  })
-  .then( function(response){
-    return response.json()
-  })
-  .then( function(json){
-    var journals = json.journals;
-    _this.processJournals(journals);
-  })
-
-}
 
 Business.prototype.isEmailValid = function(){
   if(!this.app.state.email || this.app.state.email.length < 4 || this.app.state.email.indexOf("@") < 2 || this.app.state.email.indexOf(".") < 3){

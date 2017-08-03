@@ -8,12 +8,13 @@ console.log(process.env.NODE_ENV);
 
 var Ajax = {}
 Ajax.get = function(business,path){
+  var headers = new Headers({
+    'Content-Type': 'application/json'
+  })
+  if(business.user && business.user.access_code ) headers.append( 'Authorization',business.user.access_code );
 
   return fetch(url + path,{
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': business.user.access_code
-    }),
+    headers: headers,
     mode: "cors",
     method: "GET",
   })

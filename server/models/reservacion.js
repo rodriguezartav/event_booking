@@ -1,5 +1,25 @@
 var errors = require('throw.js');
 
+exports.getStat = function(knex){
+  return knex.table("reservacion")
+  .select("*")
+  .returning('*')
+  .then(function(results){
+    var stats = {}
+    var total = 0;
+    var jueves = 0;
+    var sabado = 0;
+    var domingo = 0;
+
+    results.forEach(function(r){
+      jueves+=r.jueves;
+      sabado+=r.sabado;
+      domingo+=r.domingo;
+    })
+    return {jueves: jueves, sabado: sabado,domingo:domingo};
+  })
+}
+
 exports.create = function(knex,reservacion){
   return knex.table("reservacion")
   .returning('*')
