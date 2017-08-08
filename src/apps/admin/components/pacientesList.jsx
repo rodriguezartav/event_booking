@@ -43,12 +43,7 @@ class PacienteListItem extends React.Component {
                     </svg>{item.telefono}</button>
                 </li>
 
-                <li className="slds-col slds-item slds-m-right_large">
-                  <button title="Share this item" className="slds-button_reset slds-post__footer-action">
-                    <svg className="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle" aria-hidden="true">
-                      <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#user"></use>
-                    </svg> {item.reservacion.total_personas}</button>
-                </li>
+
                 <li className="slds-col slds-item slds-m-right_medium">
                   <button title="Comment on this item" className="slds-button_reset slds-post__footer-action">
                     <svg className="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle" aria-hidden="true">
