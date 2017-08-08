@@ -6,7 +6,7 @@ function Business(app){
   var user = localStorage.getItem('user');
   if(user) _this.user = JSON.parse(user);
   this.app.state={
-    users: [{username: "roberto@rodcocr.com", password: "monomono"},{username: "carolinadada@hotmail.com", password: "colibri"}],
+    users: [{username: "segleau@yahoo.com", password: "cusingas"},{username: "roberto@rodcocr.com", password: "monomono"},{username: "carolinadada@hotmail.com", password: "colibri"}],
     view: this.user ? "list" : "login",
     pacientes: [],
     paciente: null,

@@ -99,15 +99,76 @@ class PacienteList extends React.Component {
     } )
   }
 
+  renderCalendar(){
+
+    var jueves = [];
+    var sabado = [];
+    var domingo = [];
+
+    return this.props.items.map( function(item){
+      return <div style={{borderBottom: "1px solid #ddd"}} key={item.id} className="slds-grid">
+        <div className="slds-col slds-size--6-of-12">
+        {item.nombre}
+        </div>
+
+        <div className="slds-col slds-size--2-of-12">
+        {item.reservacion.jueves}
+        </div>
+
+        <div className="slds-col slds-size--2-of-12">
+        {item.reservacion.sabado}
+
+        </div>
+
+        <div className="slds-col slds-size--2-of-12">
+        {item.reservacion.domingo}
+
+        </div>
+        </div>
+    })
+
+
+
+  }
 
   render(){
 
-     return  <div className="slds-size--5-of-12 ">
+     return  <div className="slds-grid"><div className="slds-size--6-of-12 ">
      {this.renderStats()}
      <div className="slds-feed">
         <ul className="slds-feed__list">
         {this.renderItems()}
         </ul>
+      </div>
+      </div>
+      <div className="slds-size--5-of-12 slds-m-top-xx-large">
+        <div className="slds-m-left--small slds-p-around--medium" style={{borderLeft: "2px solid orange", height: 500, marginTop: 241}}>
+
+          <div className="slds-text-heading--medium slds-m-bottom--medium">Calendario</div>
+
+          <div className="slds-grid slds-text-heading--small">
+                  <div className="slds-col slds-size--6-of-12">
+                  Nombre
+                  </div>
+
+                  <div className="slds-col slds-size--2-of-12">
+                  Jueves
+                  </div>
+
+                  <div className="slds-col slds-size--2-of-12">
+                  Sabado
+                  </div>
+
+                  <div className="slds-col slds-size--2-of-12">
+                  Domingo
+                  </div>
+                  </div>
+
+           {this.renderCalendar()}
+
+
+
+        </div>
       </div>
       </div>
   }
