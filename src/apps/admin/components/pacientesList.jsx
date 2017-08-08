@@ -107,8 +107,11 @@ class PacienteList extends React.Component {
 
     return this.props.items.map( function(item){
       var hotel=[];
-      if(item.reservacion.jueves && item.reservacion.sabado) hotel.push("Viernes")
-      if(item.reservacion.sabado && item.reservacion.domingo) hotel.push("Sabado");
+      if(item.reservacion.sin_hotel) hotel = [];
+      else{
+        if(item.reservacion.jueves && item.reservacion.sabado) hotel.push("Viernes")
+        if(item.reservacion.sabado && item.reservacion.domingo) hotel.push("Sabado");
+      }
 
       return <div style={{borderBottom: "1px solid #ddd"}} key={item.id} className="slds-grid">
         <div className="slds-col slds-size--5-of-12">

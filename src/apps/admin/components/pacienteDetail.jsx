@@ -9,6 +9,8 @@ class SaveButton extends React.Component {
     business= Business.business;
   }
 
+
+
   render(){
     if( this.props.pendingSave){ return <div role="status" className="slds-spinner slds-spinner_medium">
         <div className="slds-spinner__dot-a"></div>
@@ -30,13 +32,20 @@ class ReservacionDetail extends React.Component {
     this.onSave = this.onSave.bind(this);
   }
 
+  onChangeHotel(e){
+    console.log(e.currentTarget.checked);
+  }
+
   onSave(){
+    console.log(this.refs.sinHotel.checked);
+
     var reservacion = {
       id: this.props.item.id,
       jueves: parseInt(this.refs.jueves.value) || 0,
       sabado: parseInt(this.refs.sabado.value) || 0,
       domingo: parseInt(this.refs.domingo.value) || 0,
       monto: parseInt(this.refs.monto.value) || 0,
+      sin_hotel: this.refs.sinHotel.checked
     }
     reservacion.total_personas = reservacion.jueves + reservacion.sabado + reservacion.domingo;
     reservacion.saldo = reservacion.monto;
@@ -83,10 +92,25 @@ class ReservacionDetail extends React.Component {
               </div>
 
               <div className="slds-form-element  slds-m-top--small">
+                <div className="demo-only slds-size_1-of-2">
+                  <div className="slds-form-element">
+                    <label className="slds-checkbox_toggle slds-grid">
+                      <span className="slds-form-element__label slds-m-bottom_none">Sin Hotel</span>
+                      <input defaultChecked={!this.props.item.sin_hotel ? false : true} ref="sinHotel" type="checkbox" name="checkbox" aria-describedby="toggle-desc" value="on"/>
+                      <span id="toggle-desc" className="slds-checkbox_faux_container" aria-live="assertive">
+                        <span className="slds-checkbox_faux"></span>
+                        <span className="slds-checkbox_on">Enabled</span>
+                        <span className="slds-checkbox_off">Disabled</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div className="slds-form-element  slds-m-top--small">
                 <label className="slds-form-element__label" >Saldo</label>
                 <div className="slds-form-element__control">
                   <label className="slds-form-element__label slds-text-heading_small">$ {this.props.item.saldo}</label>
-
                 </div>
               </div>
 
