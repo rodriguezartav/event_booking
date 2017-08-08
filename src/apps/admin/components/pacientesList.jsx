@@ -106,8 +106,12 @@ class PacienteList extends React.Component {
     var domingo = [];
 
     return this.props.items.map( function(item){
+      var hotel=[];
+      if(item.reservacion.jueves && item.reservacion.sabado) hotel.push("Viernes")
+      if(item.reservacion.sabado && item.reservacion.domingo) hotel.push("Sabado");
+
       return <div style={{borderBottom: "1px solid #ddd"}} key={item.id} className="slds-grid">
-        <div className="slds-col slds-size--6-of-12">
+        <div className="slds-col slds-size--5-of-12">
         {item.nombre}
         </div>
 
@@ -122,7 +126,9 @@ class PacienteList extends React.Component {
 
         <div className="slds-col slds-size--2-of-12">
         {item.reservacion.domingo}
-
+        </div>
+        <div className="slds-col slds-size--2-of-12">
+        {hotel.join(",")}
         </div>
         </div>
     })
@@ -133,7 +139,7 @@ class PacienteList extends React.Component {
 
   render(){
 
-     return  <div className="slds-grid"><div className="slds-size--6-of-12 ">
+     return  <div className="slds-grid"><div className="slds-size--5-of-12 ">
      {this.renderStats()}
      <div className="slds-feed">
         <ul className="slds-feed__list">
@@ -141,13 +147,13 @@ class PacienteList extends React.Component {
         </ul>
       </div>
       </div>
-      <div className="slds-size--5-of-12 slds-m-top-xx-large">
+      <div className="slds-size--7-of-12 slds-m-top-xx-large">
         <div className="slds-m-left--small slds-p-around--medium" style={{borderLeft: "2px solid orange", height: 500, marginTop: 241}}>
 
           <div className="slds-text-heading--medium slds-m-bottom--medium">Calendario</div>
 
           <div className="slds-grid slds-text-heading--small">
-                  <div className="slds-col slds-size--6-of-12">
+                  <div className="slds-col slds-size--5-of-12">
                   Nombre
                   </div>
 
@@ -161,6 +167,9 @@ class PacienteList extends React.Component {
 
                   <div className="slds-col slds-size--2-of-12">
                   Domingo
+                  </div>
+                  <div className="slds-col slds-size--2-of-12">
+                  Hotel
                   </div>
                   </div>
 
