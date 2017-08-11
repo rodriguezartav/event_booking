@@ -26,8 +26,7 @@ Business.prototype.onLogin = function(email,password){
     if( user.username == email && user.password == password ){
       _this.user = {email: email, password: password, access_code: "abcdef"};
       localStorage.setItem("user",JSON.stringify(_this.user));
-      _this.app.setState({user: user, view: "home"})
-      _this.getAll();
+      window.location.reload(true);
     }
   })
 }
